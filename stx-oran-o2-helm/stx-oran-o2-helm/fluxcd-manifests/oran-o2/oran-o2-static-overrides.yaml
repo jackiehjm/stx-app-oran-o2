@@ -1,0 +1,12 @@
+#
+# Copyright (c) 2022 Wind River Systems, Inc.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+o2ims:
+  serviceaccountname: admin-oran-o2
+  image:
+    repository: nexus3.o-ran-sc.org:10004/o-ran-sc/pti-o2imsdms
+    tag: 2.0.0
+    pullPolicy: IfNotPresent
+  logginglevel: "DEBUG"
