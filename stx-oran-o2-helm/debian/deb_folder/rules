@@ -1,0 +1,76 @@
+#!/usr/bin/make -f
+# export DH_VERBOSE = 1
+
+export ROOT = debian/tmp
+export APP_FOLDER = $(ROOT)/usr/local/share/applications/helm
+
+export DEB_VERSION = $(shell dpkg-parsechangelog | egrep '^Version:' | cut -f 2 -d ' ')
+export MAJOR = $(shell echo $(DEB_VERSION) | cut -f 1 -d '.')
+export MINOR_PATCH = $(shell echo $(DEB_VERSION) | cut -f 2 -d '.')
+
+export APP_NAME = oran-o2
+export APP_VERSION = $(MAJOR).$(MINOR_PATCH)
+export APP_TARBALL_FLUXCD = $(APP_NAME)-$(APP_VERSION).tgz
+export HELM_REPO = stx-platform
+export STAGING_FLUXCD = staging-fluxcd
+export FLUXCD_O2_PKG = oran-o2-2.0.0.tar.gz
+
+%:
+	dh $@
+
+override_dh_auto_build:
+
+	############
+	#  FLUXCD  #
+	############
+	mkdir -p fluxcd
+	mkdir -p ${APP_NAME}
+	tar -C ${APP_NAME} --strip-components=1 -xvf $(FLUXCD_O2_PKG)
+
+	# Host a server for the helm charts.
+	cd fluxcd; chartmuseum --debug --port=8879 --context-path='/charts' --storage="local" \
+		--storage-local-rootdir="." &
+	sleep 2
+	helm repo add local http://localhost:8879/charts
+
+	# Create the TGZ file.
+	mkdir -p fluxcd/charts/${APP_NAME}
+	mv ${APP_NAME}/charts/* fluxcd/charts/${APP_NAME}
+	cp files/Makefile fluxcd/charts
+	cd fluxcd/charts && make ${APP_NAME}
+
+	# Terminate the helm chart server.
+	pkill chartmuseum
+
+	# Setup the staging directory.
+	mkdir -p $(STAGING_FLUXCD)
+	cp files/metadata.yaml  $(STAGING_FLUXCD)
+	mkdir -p $(STAGING_FLUXCD)/charts
+	cp fluxcd/charts/*.tgz $(STAGING_FLUXCD)/charts
+
+	# Populate metadata.
+	sed -i 's/@APP_NAME@/$(APP_NAME)/g' $(STAGING_FLUXCD)/metadata.yaml
+	sed -i 's/@APP_VERSION@/$(APP_VERSION)/g' $(STAGING_FLUXCD)/metadata.yaml
+	sed -i 's/@HELM_REPO@/$(HELM_REPO)/g' $(STAGING_FLUXCD)/metadata.yaml
+
+	# Copy the plugins: installed in the buildroot
+	mkdir -p $(STAGING_FLUXCD)/plugins
+	cp /plugins/$(APP_NAME)/*.whl $(STAGING_FLUXCD)/plugins
+
+	cp -R fluxcd-manifests $(STAGING_FLUXCD)/
+
+	# calculate checksum of all files in app_staging
+	cd $(STAGING_FLUXCD) && find . -type f ! -name '*.md5' -print0 | xargs -0 md5sum > checksum.md5
+	tar cfz $(APP_TARBALL_FLUXCD) -C $(STAGING_FLUXCD)/ .
+
+	# Cleanup staging
+	rm -rf $(STAGING_FLUXCD)
+
+override_dh_auto_install:
+	# Install the app tar file.
+	install -d -m 755 $(APP_FOLDER)
+	install -p -D -m 755 $(APP_TARBALL_FLUXCD) $(APP_FOLDER)
+
+override_dh_auto_test:
+
+override_dh_usrlocal:
