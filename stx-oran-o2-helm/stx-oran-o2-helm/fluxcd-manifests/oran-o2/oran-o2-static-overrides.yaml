@@ -1,0 +1,22 @@
+#
+# Copyright (c) 2022 Wind River Systems, Inc.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+# ImagePullSecrets for operator ServiceAccount, list of secrets in the same
+# namespace used to pull operator image. Must be set for any cluster configured
+# with private docker registry.
+imagePullSecrets:
+  - default-registry-key
+
+# The images were selected with the latest stable tag at the time being.
+o2ims:
+  serviceaccountname: admin-oran-o2
+  images:
+    tags:
+      o2service: docker.io/oranscinf/pti-o2imsdms:2.0.0
+      postgres: docker.io/library/postgres:9.6
+      redis: docker.io/library/redis:7.0.5-alpine3.16
+    pullPolicy: IfNotPresent
+  logginglevel: "INFO"
