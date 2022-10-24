@@ -1,0 +1,5 @@
+python3-k8sapp-oran-o2 (1.0-1) unstable; urgency=medium
+
+  * Initial release.
+
+ --  Jackie Huang <jackie.huang@windriver.com>  Mon, 31 Oct 2022 11:06:42 +0000
