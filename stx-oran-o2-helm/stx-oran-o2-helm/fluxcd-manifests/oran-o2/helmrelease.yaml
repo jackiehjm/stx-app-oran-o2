@@ -7,9 +7,9 @@
 apiVersion: "helm.toolkit.fluxcd.io/v2beta1"
 kind: HelmRelease
 metadata:
-  name: stx-oran-o2
+  name: oran-o2
   labels:
-    chart_group: stx-oran-o2-charts
+    chart_group: oran-o2
 spec:
   releaseName: oran-o2
   chart:
