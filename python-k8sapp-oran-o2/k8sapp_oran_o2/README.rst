@@ -1,5 +1,5 @@
-k8sapp-nginx-ingress-controller
-===============================
+k8sapp-oran-o2
+==============
 
 This project contains StarlingX Kubernetes application specific python plugins
-for the Nginx ingress controller.
+for the ORAN O2.

@@ -1,11 +1,11 @@
-%global app_name nginx-ingress-controller
-%global pypi_name k8sapp-nginx-ingress-controller
-%global sname k8sapp_nginx_ingress_controller
+%global app_name oran-o2
+%global pypi_name k8sapp-oran-o2
+%global sname k8sapp_oran_o2
 
 Name:           python-%{pypi_name}
 Version:        1.0
 Release:        %{tis_patch_ver}%{?_tis_dist}
-Summary:        StarlingX sysinv extensions: Nginx ingress controller
+Summary:        StarlingX sysinv extensions: ORAN O2
 
 License:        Apache-2.0
 Source0:        %{name}-%{version}.tar.gz
@@ -18,7 +18,7 @@ BuildRequires: python2-pip
 BuildRequires: python2-wheel
 
 %description
-StarlingX sysinv extensions: Nginx ingress controller K8S app
+StarlingX sysinv extensions: ORAN O2 K8S app
 
 %prep
 %setup
