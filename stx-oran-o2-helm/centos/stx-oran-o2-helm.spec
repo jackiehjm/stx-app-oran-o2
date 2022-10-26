@@ -27,8 +27,8 @@ BuildArch: noarch
 
 BuildRequires: helm
 BuildRequires: chartmuseum
-#BuildRequires: python-k8sapp-oran-o2
-#BuildRequires: python-k8sapp-oran-o2-wheels
+BuildRequires: python-k8sapp-oran-o2
+BuildRequires: python-k8sapp-oran-o2-wheels
 
 %description
 StarlingX O-ORAN O2 Application FluxCD Helm Charts
@@ -80,8 +80,8 @@ sed -i 's/@APP_VERSION@/%{version}-%{tis_patch_ver}/g' %{app_staging}/metadata.y
 sed -i 's/@HELM_REPO@/%{helm_repo}/g' %{app_staging}/metadata.yaml
 
 # Copy the plugins: installed in the buildroot
-#mkdir -p %{app_staging}/plugins
-#cp /plugins/%{app_name}/*.whl %{app_staging}/plugins
+mkdir -p %{app_staging}/plugins
+cp /plugins/%{app_name}/*.whl %{app_staging}/plugins
 
 find . -type f ! -name '*.md5' -print0 | xargs -0 md5sum > checksum.md5
 tar -zcf %{_builddir}/%{app_tarball_fluxcd} -C %{app_staging}/ .
