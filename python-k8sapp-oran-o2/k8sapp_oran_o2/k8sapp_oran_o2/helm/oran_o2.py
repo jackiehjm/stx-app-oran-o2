@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2020 Wind River Systems, Inc.
+# Copyright (c) 2022 Wind River Systems, Inc.
 #
 # SPDX-License-Identifier: Apache-2.0
 #
@@ -34,15 +34,11 @@ class Orano2Helm(base.BaseHelm):
     def get_namespaces(self):
         return self.SUPPORTED_NAMESPACES
 
-    def get_master_worker_host_count(self):
-        controller=len(self.dbapi.ihost_get_by_personality(constants.CONTROLLER))
-        worker=len(self.dbapi.ihost_get_by_personality(constants.WORKER))
-        return controller+worker
-
-
     def get_overrides(self, namespace=None):
         overrides = {
-            app_constants.HELM_NS_ORAN_O2: {}
+            app_constants.HELM_NS_ORAN_O2: {
+                'replicaCount': self._num_replicas_for_platform_app(),
+            }
         }
         if namespace in self.SUPPORTED_NAMESPACES:
             return overrides[namespace]
