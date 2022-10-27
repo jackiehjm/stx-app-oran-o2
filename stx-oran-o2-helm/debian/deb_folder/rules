@@ -13,7 +13,7 @@ export APP_VERSION = $(MAJOR).$(MINOR_PATCH)
 export APP_TARBALL_FLUXCD = $(APP_NAME)-$(APP_VERSION).tgz
 export HELM_REPO = stx-platform
 export STAGING_FLUXCD = staging-fluxcd
-export FLUXCD_O2_PKG = oran-o2-dbde91156f2dc3c61e18cb78706c395efb3d34d4.tar.gz
+export FLUXCD_O2_PKG = oran-o2-bfef5abc0d2803a55e945d104195258491a9dab8.tar.gz
 
 %:
 	dh $@
