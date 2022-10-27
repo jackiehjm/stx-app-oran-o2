@@ -1,12 +1,12 @@
 ---
-debname: stx-nginx-ingress-controller-helm
+debname: stx-oran-o2-helm
 debver: 1.0-1
-src_path: stx-nginx-ingress-controller-helm
+src_path: stx-oran-o2-helm
 dl_files:
-  helm-charts-ingress-nginx-1.1.1.tar.gz:
-    topdir: helm-charts
-    url: https://github.com/kubernetes/ingress-nginx/archive/controller-v1.1.1.tar.gz
-    md5sum: 9fa3de1800175a4f7dfa890bf9d376c9
+  oran-o2-dbde91156f2dc3c61e18cb78706c395efb3d34d4.tar.gz:
+    topdir: o-ran-o2-dbde91156f2dc3c61e18cb78706c395efb3d34d4
+    url: https://github.com/jackiehjm/o-ran-o2/archive/dbde91156f2dc3c61e18cb78706c395efb3d34d4.tar.gz
+    md5sum: 8a9315d8a0be7dc615c8261b850c7019
 revision:
   dist: $STX_DIST
   PKG_GITREVCOUNT: true

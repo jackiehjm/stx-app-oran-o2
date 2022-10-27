@@ -1,4 +1,4 @@
-Source: python3-k8sapp-nginx-ingress-controller
+Source: python3-k8sapp-oran-o2
 Section: libs
 Priority: optional
 Maintainer: StarlingX Developers <starlingx-discuss@lists.starlingx.io>
@@ -11,17 +11,17 @@ Build-Depends: debhelper-compat (= 13),
 Standards-Version: 4.5.1
 Homepage: https://www.starlingx.io
 
-Package: python3-k8sapp-nginx-ingress-controller
+Package: python3-k8sapp-oran-o2
 Section: libs
 Architecture: any
 Depends: ${misc:Depends}, ${python3:Depends}
-Description: StarlingX Sysinv Nginx Extension
- This package contains the nginx ingress controller K8S app.
+Description: StarlingX Sysinv ORAN O2 Extension
+ This package contains the ORAN O2 K8S app.
 
-Package: python3-k8sapp-nginx-ingress-controller-wheels
+Package: python3-k8sapp-oran-o2-wheels
 Section: libs
 Architecture: any
 Depends: ${misc:Depends}, ${python3:Depends}, python3-wheel
-Description: StarlingX Sysinv Nginx Extension Wheels
- This package contains python wheels for the nginx ingress controller
+Description: StarlingX Sysinv ORAN O2 Extension Wheels
+ This package contains python wheels for the ORAN O2
  K8S app plugins.

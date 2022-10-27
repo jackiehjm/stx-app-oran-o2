@@ -1,9 +1,9 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: python3-k8sapp-nginx-ingress-controller
-Source: https://opendev.org/starlingx/nginx-ingress-controller-armada-app/
+Upstream-Name: python3-k8sapp-oran-o2
+Source: https://opendev.org/starlingx/app-oran-o2/
 
 Files: *
-Copyright: (c) 2013-2021 Wind River Systems, Inc
+Copyright: (c) 2022 Wind River Systems, Inc
 License: Apache-2
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
