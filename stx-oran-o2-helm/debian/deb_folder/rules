@@ -6,10 +6,10 @@ export APP_FOLDER = $(ROOT)/usr/local/share/applications/helm
 
 export DEB_VERSION = $(shell dpkg-parsechangelog | egrep '^Version:' | cut -f 2 -d ' ')
 export MAJOR = $(shell echo $(DEB_VERSION) | cut -f 1 -d '.')
-export MINOR_PATCH = $(shell echo $(DEB_VERSION) | cut -f 2 -d '.')
+export MINOR = $(shell echo $(DEB_VERSION) | cut -f 2 -d '.')
 
 export APP_NAME = oran-o2
-export APP_VERSION = $(MAJOR).$(MINOR_PATCH)
+export APP_VERSION = $(MAJOR).$(MINOR)
 export APP_TARBALL_FLUXCD = $(APP_NAME)-$(APP_VERSION).tgz
 export HELM_REPO = stx-platform
 export STAGING_FLUXCD = staging-fluxcd
@@ -55,7 +55,7 @@ override_dh_auto_build:
 
 	# Copy the plugins: installed in the buildroot
 	mkdir -p $(STAGING_FLUXCD)/plugins
-	cp /plugins/$(APP_NAME)/*.whl $(STAGING_FLUXCD)/plugins
+	cp /plugins/*.whl $(STAGING_FLUXCD)/plugins
 
 	cp -R fluxcd-manifests $(STAGING_FLUXCD)/
 

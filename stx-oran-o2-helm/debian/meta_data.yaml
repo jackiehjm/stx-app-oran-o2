@@ -9,4 +9,6 @@ dl_files:
     md5sum: b9dc448c4dbea0e5ad5f5702319eb24f
 revision:
   dist: $STX_DIST
-  PKG_GITREVCOUNT: true
+  GITREVCOUNT:
+    SRC_DIR: ${MY_REPO}/stx/app-oran-o2
+    BASE_SRCREV: 49916455ef6c8d6fbee5293424a41c3d11d2eefb
