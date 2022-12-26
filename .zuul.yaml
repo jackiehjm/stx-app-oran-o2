@@ -1,5 +1,7 @@
 ---
 - project:
+    vars:
+      ensure_tox_version: '<4'
     check:
       jobs:
         - openstack-tox-linters
@@ -37,7 +39,7 @@
     parent: tox
     description: |
       Run pylint test for k8sapp-oran-o2
-    nodeset: ubuntu-xenial
+    nodeset: ubuntu-bionic
     required-projects:
       - starlingx/config
       - starlingx/fault
